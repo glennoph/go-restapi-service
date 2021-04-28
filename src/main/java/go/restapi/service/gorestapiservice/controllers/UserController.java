@@ -2,6 +2,7 @@ package go.restapi.service.gorestapiservice.controllers;
 
 import go.restapi.service.gorestapiservice.model.UserData;
 import go.restapi.service.gorestapiservice.model.UserDataRequest;
+import go.restapi.service.gorestapiservice.model.UserDataRequestNames;
 import go.restapi.service.gorestapiservice.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,16 @@ public class UserController {
         return userData;
     }
 
-    @PutMapping(path="/{userId}")
-    public String updateUser(@PathVariable String userId) {
+    @PutMapping(path="/{userId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserData updateUserNames(@PathVariable String userId,
+                             @Valid
+                             @RequestBody UserDataRequestNames userDataRequestNames) {
         log.info("update user id="+userId);
-        return "update user called id="+userId;
+        UserData userData = userService.updateUserNames(userId, userDataRequestNames);
+        log.info("completed");
+        return userData;
     }
 
     @DeleteMapping(path="/{userId}")

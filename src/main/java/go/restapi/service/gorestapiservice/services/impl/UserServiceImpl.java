@@ -3,6 +3,7 @@ package go.restapi.service.gorestapiservice.services.impl;
 import go.restapi.service.gorestapiservice.common.UserUtil;
 import go.restapi.service.gorestapiservice.model.UserData;
 import go.restapi.service.gorestapiservice.model.UserDataRequest;
+import go.restapi.service.gorestapiservice.model.UserDataRequestNames;
 import go.restapi.service.gorestapiservice.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,18 @@ public class UserServiceImpl implements UserService {
         log.info("add userData to users map");
         users.put(userData.getUserId(), userData);
 
+        return userData;
+    }
+
+    @Override
+    public UserData updateUserNames(String userId,
+                                    UserDataRequestNames userDataRequestNames) {
+        log.info("update user names id="+userId+" names="+userDataRequestNames);
+        UserData userData = users.get(userId);
+        log.info("located userdata "+userData.toString());
+        userData.setFirstName(userDataRequestNames.getFirstName());
+        userData.setLastName(userDataRequestNames.getLastName());
+        log.info("updated userdata "+userData.toString());
         return userData;
     }
 

@@ -17,6 +17,15 @@ http://localhost:8080/users/
 ### get
 http://localhost:8080/users/<uuid>
 ### update
-todo
+http://localhost:8080/users/<uuid>
+#### body
+```json
+{
+"firstName": "fname2",
+"lastName": "lname2"
+}
+```
 ### delete
+todo
+## swagger
 todo
