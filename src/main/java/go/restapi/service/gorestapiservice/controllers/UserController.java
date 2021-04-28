@@ -7,6 +7,7 @@ import go.restapi.service.gorestapiservice.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.print.attribute.standard.Media;
@@ -33,10 +34,13 @@ public class UserController {
     }
 
     @GetMapping(path="/{userId}")
-    public UserData getUser(@PathVariable String userId) {
+    public ResponseEntity<UserData> getUser(@PathVariable String userId) {
         log.info("get user id="+userId);
         UserData userData = userService.getUser(userId);
-        return userData;
+        if (userData == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(userData);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -64,9 +68,11 @@ public class UserController {
     }
 
     @DeleteMapping(path="/{userId}")
-    public String deleteUser(@PathVariable String userId) {
+    public ResponseEntity<Void> deleteUser(@PathVariable String userId) {
         log.info("delete user id="+userId);
-        return "delete user called id="+userId;
+        userService.delete(userId);
+        log.info("deleted");
+        return ResponseEntity.noContent().build();
     }
 
 }

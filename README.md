@@ -26,6 +26,6 @@ http://localhost:8080/users/<uuid>
 }
 ```
 ### delete
-todo
+http://localhost:8080/users/<uuid>
 ## swagger
 todo

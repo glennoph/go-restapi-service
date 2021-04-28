@@ -58,8 +58,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserData getUser(String userId) {
         log.info("getUser userId="+userId);
+        if (!users.containsKey(userId)) {
+            log.info("userid not found");
+            return null;
+        }
         UserData userData = users.get(userId);
         log.info("return userData="+userData.toString());
         return userData;
+    }
+
+    @Override
+    public void delete(String userId) {
+        log.info("delete userid "+userId);
+        users.remove(userId);
     }
 }
