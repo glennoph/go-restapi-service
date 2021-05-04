@@ -28,4 +28,13 @@ http://localhost:8080/users/<uuid>
 ### delete
 http://localhost:8080/users/<uuid>
 ## swagger
-todo
+###  dependency
+```xml
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+```
+###  url
+[swagger url](http://localhost:8080/swagger-ui/)
